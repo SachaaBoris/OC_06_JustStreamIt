@@ -1,3 +1,16 @@
+*.au3
+*.bat
+_WorkDir/*
+.idea/*
+venv/*
+Include/*
+Lib/*
+Scripts/*
+api/*
+__pycache__/*
+**/__pycache__/
+__pycache__
+*/__pycache__/*
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
