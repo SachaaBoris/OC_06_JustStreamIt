@@ -10,15 +10,14 @@ La page générée est responsive mobile + tablette + desktop et utilise vanilla
 1. Prérequis :  
     Avoir Python 3 installé  
     Avoir téléchargé et installé l'API :  
-  ```
+  ```  
   git clone https://github.com/OpenClassrooms-Student-Center/OCMovies-API-EN-FR "local\folder"  
-  ```
-'  
+  ```  
     Avoir téléchargé et dézipé l'archive du projet sur votre disque dur,  
     Ou clonez le repo avec cette commande :  
-  ```
+  ```  
   git clone https://github.com/SachaaBoris/OC_06_JustStreamIt.git "local\folder"  
-  ```
+  ```  
   
 2. Installer l'environnement virtuel :  
     Depuis votre console favorite, naviguez jusqu'au repertoire de l'API  
