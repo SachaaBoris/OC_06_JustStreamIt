@@ -94,6 +94,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const movieCards = movieGrid4.getElementsByClassName('movie-card');
     const movieCardsArray = Array.from(movieCards);
     movieCardsArray.forEach(card => movieGrid4.removeChild(card));
+	grid4.currentPage = 0;
+    grid4.movies = [];
   }
   
   function calculateMoviesPerLine() {
