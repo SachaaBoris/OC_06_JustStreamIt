@@ -1,7 +1,7 @@
 # OC_06_JustStreamIt  :movie_camera:  
   
 # ● Description du projet  
-Site web JustStreamIt affichant les meilleurs films générés par une api.  
+Site web JustStreamIt affichant les meilleurs films d'une bdd en passant par une api.  
 Il permet de générer un affichage clair et intuitif des films les mieux notés. En plus d'une premiere grille des meilleurs films, le site propose deux autres grilles de rangement par genre et une quatrieme grille à choix libre.  
 Le site interroge une API qui va chercher dans une base de données de films les éléments requis pour la construction et l'affichage de la page web.  
 La page générée est responsive mobile + tablette + desktop et utilise vanilla css + vanilla javascript.  
