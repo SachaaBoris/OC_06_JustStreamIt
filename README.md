@@ -13,7 +13,7 @@ La page générée est responsive mobile + tablette + desktop et utilise vanilla
   ```
   git clone https://github.com/OpenClassrooms-Student-Center/OCMovies-API-EN-FR "local\folder"  
   ```
-  
+'  
     Avoir téléchargé et dézipé l'archive du projet sur votre disque dur,  
     Ou clonez le repo avec cette commande :  
   ```
