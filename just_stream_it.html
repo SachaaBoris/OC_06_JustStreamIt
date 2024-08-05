@@ -1,0 +1,77 @@
+<!DOCTYPE html><html lang="en"><meta charset="UTF-8">
+<head>
+  <link rel="stylesheet" href="just_stream_it.css">
+  <title>Just Stream It - Vidéos à la demande</title>
+</head>
+<body>
+  <header>
+	<div class="header-container">
+	  <img class="logo" src="logo.png" alt="Just Stream It" />
+      <h1>Vidéos à la demande</h1>
+	</div>
+  </header>
+
+  <div class="container">
+	<div class="main-content">
+	  <div class="featured-movie-header">
+	    <h2>Best Movie Pick:</h2>
+	  </div>
+      <div class="featured-movie" id="featuredMovie">
+        <!-- Featured movie will be dynamically inserted here -->
+      </div>
+	</div>
+	
+	<div class="main-content">
+	  <h2 class="grid-header" id="gridHeader1">Best Movies</h2>
+	  <div class="movie-grid" id="movieGrid1">
+	    <!-- Movie Grid 1 will be dynamically inserted here -->
+	  </div>
+	  <div class="more-container">
+	    <div class="more-btn" id="loadMoreBtn1">More</div>
+	  </div>
+	</div>
+	
+	<div class="main-content">
+	  <h2 class="grid-header" id="gridHeader2">Movies 2</h2>
+	  <div class="movie-grid" id="movieGrid2">
+	    <!-- Movie Grid 2 will be dynamically inserted here -->
+	  </div>
+	  <div class="more-container">
+	    <div class="more-btn" id="loadMoreBtn2">More</div>
+	  </div>
+	</div>
+	
+	<div class="main-content">
+	  <h2 class="grid-header" id="gridHeader3">Movies 3</h2>
+	  <div class="movie-grid" id="movieGrid3">
+	    <!-- Movie Grid 3 will be dynamically inserted here -->
+	  </div>
+	  <div class="more-container">
+	    <div class="more-btn" id="loadMoreBtn3">More</div>
+	  </div>
+	</div>
+	
+	<div class="main-content">
+	  <h2 class="grid-header" id="gridHeader4">Movies 4</h2>
+	  <select id="filterGenre"></select>
+	  <div class="movie-grid" id="movieGrid4">
+	    <!-- Movie Grid 4 will be dynamically inserted here -->
+	  </div>
+	  <div class="more-container">
+	    <div class="more-btn" id="loadMoreBtn4">More</div>
+	  </div>
+	</div>
+	
+  </div>
+
+  <div id="movieModal" class="modal">
+    <div class="modal-content">
+      <div id="modalContent">
+	    <!-- Modal will be dynamically inserted here -->
+	  </div>
+    </div>
+  </div>
+  
+  <div class="footer"></div>
+  <script src="just_stream_it.js"></script>
+</body></html>
