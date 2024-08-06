@@ -248,10 +248,13 @@ document.addEventListener('DOMContentLoaded', async () => {
       grid.movies = await fetchMovies(grid.genre, grid.fetchUrl);
 	}
     displayMovies(grid);
+	
 	// More btn 1
-	grid.moreClickHandler = () => loadMoreMovies(grid);
-    document.getElementById(grid.buttonId).removeEventListener('click', grid.moreClickHandler);
-    document.getElementById(grid.buttonId).addEventListener('click', grid.moreClickHandler);
+	const loadMoreHandler = () => loadMoreMovies(grid);
+    const buttonElement = document.getElementById(grid.buttonId);
+    buttonElement.removeEventListener('click', grid.moreClickHandler);
+    buttonElement.addEventListener('click', loadMoreHandler);
+    grid.moreClickHandler = loadMoreHandler;
 	//console.log(`Movies = ${(grid.movies).length}`);
 	//console.log(`Movies per lines = ${grid.moviesPerLine}`);
   }
