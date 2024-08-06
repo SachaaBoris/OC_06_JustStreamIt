@@ -194,7 +194,7 @@ select {
 	padding-bottom: 20px;
 	border: 1px solid #888;
 	width: 80%;
-	max-width: 1600px;
+	max-width: 1160px;
 	overflow: hidden;
 }
 
@@ -265,7 +265,7 @@ select {
     display: none;
 }
 
-@media (max-width: 1600px) {
+@media (max-width: 1679px) {
 	.movie-grid {
 		grid-template-columns: repeat(4, minmax(140px, 140px));
 	}

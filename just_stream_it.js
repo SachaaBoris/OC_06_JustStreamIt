@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 	}  
   }
   
-  function clearMovieCards() {
+  function clearMovieGrids() {
     const movieGrids = ['movieGrid1', 'movieGrid2', 'movieGrid3', 'movieGrid4'];
     movieGrids.forEach(gridId => {
       const gridElement = document.getElementById(gridId);
@@ -100,8 +100,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   
   function calculateMoviesPerLine() {
 	const mediaQueryMobile = window.matchMedia("(max-width: 720px)");
-    const mediaQueryTablet = window.matchMedia("(min-width: 721px) and (max-width: 1680px)");
-    const mediaQueryDesktop = window.matchMedia("(min-width: 1681px)");
+    const mediaQueryTablet = window.matchMedia("(min-width: 721px) and (max-width: 1679px)");
+    const mediaQueryDesktop = window.matchMedia("(min-width: 1680px)");
 	let number;
     if (mediaQueryMobile.matches) {
       number = 2;
@@ -110,24 +110,29 @@ document.addEventListener('DOMContentLoaded', async () => {
     } else if (mediaQueryDesktop.matches) {
       number = 6;
     }
-	applyMoviesPerLine(number)
+	applyMoviesPerLine(number);
   }
 
   calculateMoviesPerLine();
   
-  //let previousWidth = window.innerWidth;
-  //window.addEventListener('resize', () => {
-  //  const currentWidth = window.innerWidth;
-  //  if (currentWidth !== previousWidth) {
-  //    previousWidth = currentWidth;
-  //    calculateMoviesPerLine();
-  //    clearMovieCards()
-  //    initializeGrid(grid1);
-  //    initializeGrid(grid2);
-  //    initializeGrid(grid3);
-  //    initializeGrid(grid4);
-  //  };
-  //});
+  let previousWidth = window.innerWidth;
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      //console.log(Previous width = ${previousWidth});
+      const currentWidth = window.innerWidth;
+      if (currentWidth !== previousWidth) {
+        previousWidth = currentWidth;
+        calculateMoviesPerLine();
+        clearMovieCards();
+        initializeGrid(grid1);
+        initializeGrid(grid2);
+        initializeGrid(grid3);
+        initializeGrid(grid4);
+      }
+    }, 250); // Adjust this delay as needed
+  });
   
   function initializeFilter() {
     const filter = document.getElementById('filterGenre');
@@ -226,19 +231,27 @@ document.addEventListener('DOMContentLoaded', async () => {
     btnb.addEventListener('click', () => openModal(movie_id));
   }
   
+  async function loadMoreMovies(grid) {
+	console.log(`Grid current page = ${grid.currentPage}`);
+	console.log(`Grid movies pl = ${grid.moviesPerLine}`);
+	console.log(`Grid lenght = ${grid.movies.length}`);
+	if (grid.currentPage * grid.moviesPerLine + grid.moviesPerLine < grid.movies.length) {
+      grid.currentPage++;
+    } else {
+      grid.currentPage = 0;
+    }
+    displayMovies(grid);
+  }
+  
   async function initializeGrid(grid) {
 	if (((grid.movies).length) === 0) {
       grid.movies = await fetchMovies(grid.genre, grid.fetchUrl);
 	}
     displayMovies(grid);
-    document.getElementById(grid.buttonId).addEventListener('click', () => {
-      if (grid.currentPage * grid.moviesPerLine + grid.moviesPerLine < grid.movies.length) {
-        grid.currentPage++;
-      } else {
-        grid.currentPage = 0;
-      }
-      displayMovies(grid);
-    });
+	// More btn 1
+	grid.moreClickHandler = () => loadMoreMovies(grid);
+    document.getElementById(grid.buttonId).removeEventListener('click', grid.moreClickHandler);
+    document.getElementById(grid.buttonId).addEventListener('click', grid.moreClickHandler);
 	//console.log(`Movies = ${(grid.movies).length}`);
 	//console.log(`Movies per lines = ${grid.moviesPerLine}`);
   }
@@ -280,8 +293,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       movieGrid.appendChild(movieCard);
     }
 	
+	// More btn 2
     const loadMoreBtn = document.getElementById(grid.buttonId);
-	console.log(`Grid lenght = ${(grid.movies).length}`);
     if (endIndex < grid.movies.length) {
       loadMoreBtn.textContent = 'More';
       loadMoreBtn.classList.remove('hidden');
@@ -320,7 +333,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     movie = await fetchMovie(id);
     const modalContent = document.getElementById('modalContent');
     modalContent.innerHTML = ''; // Clear previous content
-  
+	
     // Create elements
     const modalHeader = document.createElement('div');
     modalHeader.className = 'modal-header';
@@ -336,20 +349,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     const modalBody = document.createElement('div');
     modalBody.className = 'modal-body';
-  
+	
     const infoContainer = document.createElement('div');
     infoContainer.className = 'info-container';
-  
+	
     const details_div = document.createElement('div');
     details_div.className = 'details';
-  
+	
     const yearAndGenre_div = document.createElement('div');
     const year = fillWithData(movie.date_published.split('-')[0], 'year');
     const genres = fillWithData(movie.genres.join(', '), 'genres');
     yearAndGenre_div.textContent = `${year} - ${genres}`;
-  
+	
     const rtc_div = document.createElement('div');
-    //const countryCodesList = movie.countries.split(', ');
     const country = fillWithData(movie.countries.join(' / '), 'country');
     const rated_tmp = fillWithData(movie.rated, 'rating');
     const rating_filter = ['Not rated or unkown rating', 'Not rated or unknown rating'];
