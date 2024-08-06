@@ -70,6 +70,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   function applyMoviesPerLine(number) {
 	const movieGrids = [grid1, grid2, grid3, grid4];
 	for (const grid of movieGrids) {
+	console.log('number');
+	console.log(number);
+	console.log('grid');
+	console.log(grid);
 	  grid.moviesPerLine = number;
 	}  
   }
@@ -100,8 +104,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   
   function calculateMoviesPerLine() {
 	const mediaQueryMobile = window.matchMedia("(max-width: 720px)");
-    const mediaQueryTablet = window.matchMedia("(min-width: 721px) and (max-width: 1680px)");
-    const mediaQueryDesktop = window.matchMedia("(min-width: 1681px)");
+    const mediaQueryTablet = window.matchMedia("(min-width: 721px) and (max-width: 1679px)");
+    const mediaQueryDesktop = window.matchMedia("(min-width: 1680px)");
 	let number;
     if (mediaQueryMobile.matches) {
       number = 2;
@@ -110,7 +114,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     } else if (mediaQueryDesktop.matches) {
       number = 6;
     }
-	applyMoviesPerLine(number)
+	applyMoviesPerLine(number);
   }
 
   calculateMoviesPerLine();
@@ -251,7 +255,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 	
     const startIndex = grid.currentPage * grid.moviesPerLine;
     const endIndex = Math.min(startIndex + grid.moviesPerLine, grid.movies.length);
-    
+
+    console.log('grid.moviesPerLine');
+    console.log(grid.moviesPerLine);
+    console.log('startIndex');
+    console.log(startIndex);
+    console.log('endIndex');
+    console.log(endIndex);
     for (let i = startIndex; i < endIndex; i++) {
       const movie = grid.movies[i];
 	  const poster_url = await checkImage(movie.image_url, movie.id)
@@ -283,6 +293,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     const loadMoreBtn = document.getElementById(grid.buttonId);
 	console.log(`Grid lenght = ${(grid.movies).length}`);
     if (endIndex < grid.movies.length) {
+    console.log('toto');
+    console.log('endIndex');
+        console.log(endIndex);
+        console.log('grid.movies.length');
+        console.log(grid.movies.length);
+
       loadMoreBtn.textContent = 'More';
       loadMoreBtn.classList.remove('hidden');
     } else if (grid.currentPage === 0) {
