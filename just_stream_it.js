@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     movies: [], 
     currentPage: 0,
 	moviesPerLine: 0,
-    fetchUrl: 'http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&page_size=12'
+    fetchUrl: 'http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&page_size=6'
   };
   
   let grid2 = { 
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     movies: [], 
     currentPage: 0,
 	moviesPerLine: 0,
-    fetchUrl: `http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&page_size=12&genre_contains=${encodeURIComponent(selectedGridGenre2)}`
+    fetchUrl: `http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&page_size=6&genre_contains=${encodeURIComponent(selectedGridGenre2)}`
   };
   
   let grid3 = { 
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     movies: [], 
     currentPage: 0,
 	moviesPerLine: 0,
-    fetchUrl: `http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&page_size=12&genre_contains=${encodeURIComponent(selectedGridGenre3)}`
+    fetchUrl: `http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&page_size=6&genre_contains=${encodeURIComponent(selectedGridGenre3)}`
   };
   
   let grid4 = { 
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     movies: [], 
     currentPage: 0,
 	moviesPerLine: 0,
-    fetchUrl: `http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&page_size=12&genre_contains=${encodeURIComponent(selectedGridGenre4)}`
+    fetchUrl: `http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&page_size=6&genre_contains=${encodeURIComponent(selectedGridGenre4)}`
   };
   
   // Appliquer le nombre de films par ligne 
@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       <div class="inner-movie-content">
         <div class="inner-movie-title"><h3>${movie.original_title}</h3></div>
         <div class="inner-movie-resume">${movie.description}</div>
-        <p>Rating: ${movie.imdb_score}/10</p>
+        <div class="inner-movie-rating">Rating: ${movie.imdb_score}/10</div>
         <div class="inner-btn-container">
           <div class="inner-movie-button">Details</div>
         </div>
