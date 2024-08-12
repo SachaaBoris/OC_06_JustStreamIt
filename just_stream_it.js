@@ -4,16 +4,30 @@ const selectedGridGenre2 = shuffledGenres[0];
 const selectedGridGenre3 = shuffledGenres[1];
 let selectedGridGenre4 = shuffledGenres[2];
 const grid1 = createGridConfig("movieGrid1", "loadMoreBtn1");
-const grid2 = createGridConfig("movieGrid2", "loadMoreBtn2", selectedGridGenre2);
-const grid3 = createGridConfig("movieGrid3", "loadMoreBtn3", selectedGridGenre3);
-const grid4 = createGridConfig("movieGrid4", "loadMoreBtn4", selectedGridGenre4);
+const grid2 = createGridConfig(
+  "movieGrid2",
+  "loadMoreBtn2",
+  selectedGridGenre2
+);
+const grid3 = createGridConfig(
+  "movieGrid3",
+  "loadMoreBtn3",
+  selectedGridGenre3
+);
+const grid4 = createGridConfig(
+  "movieGrid4",
+  "loadMoreBtn4",
+  selectedGridGenre4
+);
 const debouncedHandleScreenChange = debounce(handleScreenChange, 250);
 const mediaQueryMobile = window.matchMedia("(max-width: 719px)");
-const mediaQueryTablet = window.matchMedia("(min-width: 720px) and (max-width: 1199px)");
+const mediaQueryTablet = window.matchMedia(
+  "(min-width: 720px) and (max-width: 1199px)"
+);
 const mediaQueryDesktop = window.matchMedia("(min-width: 1200px)");
-mediaQueryMobile.addEventListener('change', debouncedHandleScreenChange);
-mediaQueryTablet.addEventListener('change', debouncedHandleScreenChange);
-mediaQueryDesktop.addEventListener('change', debouncedHandleScreenChange);
+mediaQueryMobile.addEventListener("change", debouncedHandleScreenChange);
+mediaQueryTablet.addEventListener("change", debouncedHandleScreenChange);
+mediaQueryDesktop.addEventListener("change", debouncedHandleScreenChange);
 let previousWidth = window.innerWidth;
 let resizeTimer;
 let debounceTimeout;
@@ -21,50 +35,69 @@ let handleLoadMoreClick;
 let handleResetClick;
 
 // Appeller les fonctions principales
-createSections()
-createDivHeaders()
+createSections();
+createDivHeaders();
 calculateMoviesShown();
 initializeFilter();
-pageInit()
+pageInit();
 
 // Debounce
 function debounce(func, delay) {
-    return function(...args) {
-        clearTimeout(debounceTimeout);
-        debounceTimeout = setTimeout(() => func.apply(this, args), delay);
-    };
+  return function (...args) {
+    clearTimeout(debounceTimeout);
+    debounceTimeout = setTimeout(() => func.apply(this, args), delay);
+  };
 }
 
 // Création des sections
 function createSections() {
-  const mainContainer = document.querySelector('main.container');
+  const mainContainer = document.querySelector("main.container");
   const sectionsData = [
-      { headerText: 'Best Movie Pick:', gridId: 'featuredMovie', type: 'featured' },
-      { headerText: 'Best Movies', gridId: 'movieGrid1', buttonId: 'loadMoreBtn1' },
-      { headerText: 'Movies 2', gridId: 'movieGrid2', buttonId: 'loadMoreBtn2' },
-      { headerText: 'Movies 3', gridId: 'movieGrid3', buttonId: 'loadMoreBtn3' },
-      { headerText: 'Movies 4', gridId: 'movieGrid4', buttonId: 'loadMoreBtn4', filterGenre: true }
+    {
+      headerText: "Best Movie Pick:",
+      gridId: "featuredMovie",
+      type: "featured",
+    },
+    {
+      headerText: "Best Movies",
+      gridId: "movieGrid1",
+      buttonId: "loadMoreBtn1",
+    },
+    { headerText: "Movies 2", gridId: "movieGrid2", buttonId: "loadMoreBtn2" },
+    { headerText: "Movies 3", gridId: "movieGrid3", buttonId: "loadMoreBtn3" },
+    {
+      headerText: "Movies 4",
+      gridId: "movieGrid4",
+      buttonId: "loadMoreBtn4",
+      filterGenre: true,
+    },
   ];
-  
+
   sectionsData.forEach((sectionData, index) => {
-    const section = document.createElement('section');
+    const section = document.createElement("section");
     section.innerHTML = `
       <div class="main-content">
-        ${sectionData.type === 'featured' ? `
+        ${
+          sectionData.type === "featured"
+            ? `
         <div class="featured-movie-header">
           <h2>${sectionData.headerText}</h2>
         </div>
         <div class="featured-movie" id="${sectionData.gridId}">
           <!-- Featured movie will be dynamically inserted here -->
-        </div>` : `
-        <h2 class="grid-header" id="gridHeader${index}">${sectionData.headerText}</h2>
-        ${sectionData.filterGenre ? '<select id="filterGenre"></select>' : ''}
+        </div>`
+            : `
+        <h2 class="grid-header" id="gridHeader${index}">${
+                sectionData.headerText
+              }</h2>
+        ${sectionData.filterGenre ? '<select id="filterGenre"></select>' : ""}
         <div class="movie-grid" id="${sectionData.gridId}">
           <!-- Movie Grid ${index} will be dynamically inserted here -->
         </div>
         <div class="more-container">
           <div class="more-btn" id="${sectionData.buttonId}">More</div>
-        </div>`}
+        </div>`
+        }
       </div>
     `;
     mainContainer.appendChild(section);
@@ -92,19 +125,22 @@ function createDivHeaders() {
 
 // Définition d'une grid avec ses attributs
 function createGridConfig(elementId, buttonId, genre = null) {
-    const baseFetchUrl = "http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&page_size=6";
-    const fetchUrl = genre ? `${baseFetchUrl}&genre_contains=${encodeURIComponent(genre)}` : baseFetchUrl;
-  
-    return {
-        elementId: elementId,
-        buttonId: buttonId,
-		buttonEh: false,
-        movies: [],
-        currentPage: 0,
-        moviesShown: 0,
-		resetCards: 0,
-        fetchUrl: fetchUrl,
-    };
+  const baseFetchUrl =
+    "http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&page_size=6";
+  const fetchUrl = genre
+    ? `${baseFetchUrl}&genre_contains=${encodeURIComponent(genre)}`
+    : baseFetchUrl;
+
+  return {
+    elementId: elementId,
+    buttonId: buttonId,
+    buttonEh: false,
+    movies: [],
+    currentPage: 0,
+    moviesShown: 0,
+    resetCards: 0,
+    fetchUrl: fetchUrl,
+  };
 }
 
 // Appliquer le nombre de films
@@ -145,7 +181,7 @@ function clearMovieGrids() {
 
   [grid1, grid2, grid3, grid4].forEach((grid) => {
     grid.currentPage = 0;
-	initializeGrid(grid);
+    initializeGrid(grid);
   });
 }
 
@@ -171,8 +207,8 @@ function clearMovieGrid4() {
 
 // Gestion du redimensionnement
 function handleScreenChange() {
-	calculateMoviesShown();
-	clearMovieGrids()
+  calculateMoviesShown();
+  clearMovieGrids();
 }
 
 // Initialisation des filtres de la grille 4
@@ -191,7 +227,7 @@ function initializeFilter() {
   filter.addEventListener("change", () => {
     clearMovieGrid4();
     selectedGridGenre4 = `${filter.value}`;
-	const titleGrid4 = document.getElementById("gridHeader4");
+    const titleGrid4 = document.getElementById("gridHeader4");
     titleGrid4.textContent = `${filter.value}` + " Movies";
     grid4.genre = `${filter.value}`;
     grid4.fetchUrl = `http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&page_size=12&genre_contains=${encodeURIComponent(
@@ -279,7 +315,6 @@ async function displayFeaturedMovie(movie) {
 
 // Verifier s'il y'a d'autres films à charger
 function isThereMore(films, line, page) {
-
   if (line === 6) return false;
 
   if (line === 4) {
@@ -305,39 +340,43 @@ function loadMoreMovies(grid) {
   const movieCards = document.getElementById(grid.elementId).children;
   const loadMoreBtn = document.getElementById(grid.buttonId);
   grid.currentPage++;
-  const morefilms = isThereMore(grid.movies.length, grid.moviesShown, grid.currentPage)
-  if ((grid.moviesShown === 6)||(grid.movies.length < grid.moviesShown)) {
+  const morefilms = isThereMore(
+    grid.movies.length,
+    grid.moviesShown,
+    grid.currentPage
+  );
+  if (grid.moviesShown === 6 || grid.movies.length < grid.moviesShown) {
     // Tous les films sont affichés, le bouton ne doit pas apparaître
     loadMoreBtn.style.display = "none";
   } else {
-	loadMoreBtn.style.display = "block";
-	if (loadMoreBtn.textContent === "Reset") {
-	  let i = 1;
-	  for (const movieCard of movieCards) {
-		if (i > grid.moviesShown) {
-		  movieCard.style.display = "none";
-		}
-	    i++
-	  }
-	  if (grid.elementId != "movieGrid4") {
-	    window.scrollBy(0, -(330 * grid.resetCards));
-	  }
+    loadMoreBtn.style.display = "block";
+    if (loadMoreBtn.textContent === "Reset") {
+      let i = 1;
+      for (const movieCard of movieCards) {
+        if (i > grid.moviesShown) {
+          movieCard.style.display = "none";
+        }
+        i++;
+      }
+      if (grid.elementId != "movieGrid4") {
+        window.scrollBy(0, -(330 * grid.resetCards));
+      }
       loadMoreBtn.textContent = "More";
-	  grid.currentPage = 0;
+      grid.currentPage = 0;
     } else {
-	  let i = 1;
-	  for (const movieCard of movieCards) {
-		if (i <= (grid.moviesShown * (grid.currentPage + 1))) {
-		  movieCard.style.display = "block";
-		}
-	    i++
-	  }
+      let i = 1;
+      for (const movieCard of movieCards) {
+        if (i <= grid.moviesShown * (grid.currentPage + 1)) {
+          movieCard.style.display = "block";
+        }
+        i++;
+      }
       if (morefilms) {
         loadMoreBtn.textContent = "More";
-	  } else {
-	    loadMoreBtn.textContent = "Reset";
-	  }
-	}
+      } else {
+        loadMoreBtn.textContent = "Reset";
+      }
+    }
   }
 }
 
@@ -360,9 +399,7 @@ async function displayMovies(grid) {
     const poster_url = await checkImage(movie.image_url, movie.id);
 
     // Obtenir l'évaluation en étoiles
-    const { fullStars, halfStar, emptyStars } = getStarRating(
-      movie.imdb_score
-    );
+    const { fullStars, halfStar, emptyStars } = getStarRating(movie.imdb_score);
     let starsHtml = "";
     starsHtml += createStarElement("full").repeat(fullStars);
     starsHtml += createStarElement("half").repeat(halfStar);
@@ -371,8 +408,8 @@ async function displayMovies(grid) {
     // Créer la carte du film
     const movieCard = document.createElement("div");
     movieCard.classList.add("movie-card");
-	if (movieCount >= grid.moviesShown) {
-        movieCard.style.display = "none";
+    if (movieCount >= grid.moviesShown) {
+      movieCard.style.display = "none";
     }
     movieCard.innerHTML = `
       <img src="${poster_url}" alt="${movie.title}">
@@ -387,21 +424,21 @@ async function displayMovies(grid) {
     const movie_id = movie.id;
     movieCard.addEventListener("click", () => openModal(movie_id));
     movieGrid.appendChild(movieCard);
-	movieCount++;
+    movieCount++;
   }
 
   // More btn
   grid.resetCards = grid.movies.length - grid.moviesShown;
   const loadMoreBtn = document.getElementById(grid.buttonId);
   if (!grid.buttonEh) {
-	grid.buttonEh = true;
-	loadMoreBtn.addEventListener('click', () => loadMoreMovies(grid));
+    grid.buttonEh = true;
+    loadMoreBtn.addEventListener("click", () => loadMoreMovies(grid));
   }
-  if ((grid.moviesShown === 6)||(grid.movies.length < grid.moviesShown)) {
+  if (grid.moviesShown === 6 || grid.movies.length < grid.moviesShown) {
     // Tous les films sont affichés, le bouton ne doit pas apparaître
     loadMoreBtn.style.display = "none";
   } else {
-	loadMoreBtn.style.display = "block";
+    loadMoreBtn.style.display = "block";
   }
 }
 
@@ -450,11 +487,19 @@ async function openModal(id) {
     directors,
     long_description,
     actors,
-    image_url
+    image_url,
   } = movie;
 
-  const sanitizedRating = ["Not rated or unkown rating", "Not rated or unknown rating"].includes(rated) ? "Not rated" : rated;
-  const boxOffice = worldwide_gross_income === 'Unknown worldwide_gross_income.' ? 'Unknown' : `${worldwide_gross_income} $`;
+  const sanitizedRating = [
+    "Not rated or unkown rating",
+    "Not rated or unknown rating",
+  ].includes(rated)
+    ? "Not rated"
+    : rated;
+  const boxOffice =
+    worldwide_gross_income === "Unknown worldwide_gross_income."
+      ? "Unknown"
+      : `${worldwide_gross_income} $`;
 
   modalContent.innerHTML = `
     <div class="modal-header">
@@ -464,18 +509,30 @@ async function openModal(id) {
     <div class="modal-body">
       <div class="info-container">
         <div class="details">
-          <div>${fillWithData(date_published.split("-")[0], "year")} - ${fillWithData(genres.join(", "), "genres")}</div>
-          <div>${sanitizedRating} - ${fillWithData(duration, "duration")}mn (${fillWithData(countries.join(" / "), "country")})</div>
+          <div>${fillWithData(
+            date_published.split("-")[0],
+            "year"
+          )} - ${fillWithData(genres.join(", "), "genres")}</div>
+          <div>${sanitizedRating} - ${fillWithData(
+    duration,
+    "duration"
+  )}mn (${fillWithData(countries.join(" / "), "country")})</div>
           <div>Box Office: ${boxOffice}</div>
           <div>IMDb Score: ${fillWithData(imdb_score, "score")}/10</div>
           <div class="directors-label">Director:</div>
           <div class="directors">${fillWithData(directors, "director")}</div>
           <div class="synopsis-label">Synopsis:</div>
-          <div class="synopsis">${fillWithData(long_description, "synopsis")}</div>
+          <div class="synopsis">${fillWithData(
+            long_description,
+            "synopsis"
+          )}</div>
           <div class="actors-label">Featuring:</div>
           <div class="actors">${fillWithData(actors.join(", "), "actors")}</div>
         </div>
-        <img src="${await checkImage(image_url, id)}" alt="${fillWithData(title, "title")} Poster">
+        <img src="${await checkImage(image_url, id)}" alt="${fillWithData(
+    title,
+    "title"
+  )} Poster">
       </div>
     </div>
   `;
@@ -517,4 +574,3 @@ async function pageInit() {
   await initializeGrid(grid3);
   await initializeGrid(grid4);
 }
-
