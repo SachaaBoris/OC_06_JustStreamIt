@@ -102,6 +102,7 @@ function createGridConfig(elementId, buttonId, genre = null) {
         movies: [],
         currentPage: 0,
         moviesShown: 0,
+		resetCards: 0,
         fetchUrl: fetchUrl,
     };
 }
@@ -318,7 +319,9 @@ function loadMoreMovies(grid) {
 		}
 	    i++
 	  }
-	  window.scrollBy(0, -(560 * (grid.currentPage)));
+	  if (grid.elementId != "movieGrid4") {
+	    window.scrollBy(0, -(330 * grid.resetCards));
+	  }
       loadMoreBtn.textContent = "More";
 	  grid.currentPage = 0;
     } else {
@@ -388,6 +391,7 @@ async function displayMovies(grid) {
   }
 
   // More btn
+  grid.resetCards = grid.movies.length - grid.moviesShown;
   const loadMoreBtn = document.getElementById(grid.buttonId);
   if (!grid.buttonEh) {
 	grid.buttonEh = true;
