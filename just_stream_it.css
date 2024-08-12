@@ -1,288 +1,297 @@
 * {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
+	box-sizing : border-box;
+	margin : 0;
+	padding : 0;
 }
 
 body {
-	font-family: Arial, sans-serif;
-	line-height: 1.6;
-	color: #333;
-	background-color: #f4f4f4;
+	font-family : Arial, sans-serif;
+	line-height : 1.6;
+	color : #333;
+	background-color : #f4f4f4;
 }
 
 header, .footer {
-	min-height: 80px;
-	width: 100%;
-	background: #333;
-	color: #fff;
+	min-height : 80px;
+	width : 100%;
+	background : #333;
+	color : #fff;
 }
 
 .footer {
-	margin-top: 20px;
+	margin-top : 20px;
 }
 
 .header-container {
-	width: 90%;
-	max-width: 1200px;
-	margin: 0 auto;
-	display: flex;
+	max-width : 1000px;
+	margin : 0 auto;
+	display : flex;
 }
 
 .container {
-	width: 90%;
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: 20px;
+	max-width : 1000px;
+	margin : 0 auto;
+	padding : 20px;
 }
 
 h1 {
-	margin-top: 16px;
-	margin-left: 5%;
-	font-size: 2.5em;
+	margin-top : 23px;
+	margin-left : 5%;
+	font-size : 1.5em;
 }
 
 img.logo {
-	min-width: 120px;
-	width: 12%;
-	height: 12%;
-	filter: invert(1);
-	padding: 0px 0px 0px 20px;
+	min-width : 120px;
+	width : 12%;
+	height : 12%;
+	filter : invert(1);
+	padding : 0 0 0 20px;
 }
 
 .featured-movie-header {
-	background: #333;
-	color: #fff;
-	padding-left: 20px;
+	background : #333;
+	color : #fff;
+	padding-left : 20px;
 }
 
 .featured-movie {
-	background: #fff;
-	margin-bottom: 20px 0;
-	padding: 20px;
-	border-radius: 5px;
-	box-shadow: 0 0 10px rgba(0,0,0,0.1);
-	display: flex;
+	background : #fff;
+	padding : 20px;
+	border-radius : 5px;
+	box-shadow : 0 0 10px rgb(0, 0, 0, 0.1);
+	display : flex;
 }
 
 .featured-poster {
-	max-width: 100%;
-	height: 300px;
-	border-radius: 5px;
-	cursor: pointer;
-	filter: drop-shadow(0 0 3px rgba(0,0,0,0.3));
+	max-width : 100%;
+	height : 300px;
+	border-radius : 5px;
+	cursor : pointer;
+	filter : drop-shadow(0 0 3px rgb(0, 0, 0, 0.3));
 }
 
 .inner-movie-content {
-	position:relative;
-	width: 100%;
-	margin-left: 20px;
-	height: 300px;
+	position : relative;
+	width : 100%;
+	margin-left : 20px;
+	height : 300px;
 }
 
 .inner-movie-resume {
-	margin-top: 20px;
-	margin-bottom: 20px;
-	text-justify: auto;
+	margin-top : 20px;
+	margin-bottom : 20px;
+	text-justify : auto;
 }
 
 .inner-btn-container {
-	position:absolute;
-	bottom:0;
-	right:0;
-	height: 30px;
+	position : absolute;
+	bottom : 0;
+	right : 0;
+	height : 30px;
 }
 
 .inner-movie-button {
-	padding: 5px 20px;
+	padding : 5px 20px;
 }
 
-.inner-movie-button, .more-btn {
-	background-color: #b74343;
-	font-weight: bold;
-	color: #fff;
-	border-radius: 20px;
-	width: 90px;
-	height: 32px;
-	cursor: pointer;
-	text-align: center;
+.inner-movie-button, .more-btn, .card-details-button {
+	background-color : #b74343;
+	font-weight : bold;
+	color : #fff;
+	border-radius : 20px;
+	width : 90px;
+	height : 32px;
+	cursor : pointer;
+	text-align : center;
 }
 
 .more-container {
-	margin-top: 30px;
-	width: 100%;
-	text-align: center;
+	margin-top : 30px;
+	width : 100%;
+	text-align : center;
 }
 
 .more-btn {
-	margin: auto;
-	padding: 5px 20px;
+	display : none;
+}
+
+.more-btn, .card-details-button {
+	margin : auto;
+	padding : 5px 20px;
+}
+
+.card-details-button {
+	margin-bottom : 10px;
 }
 
 select {
-	padding: 5px;
-	margin-right: 10px;
+	padding : 5px;
+	margin-right : 10px;
 }
 
 .grid-header, .movie-grid, .main-content {
-	margin-top: 30px;
+	margin-top : 30px;
 }
 
 .movie-grid {
-	display: grid;
-	grid-template-columns: repeat(3, minmax(280px, 280px));
-	justify-content: space-between;
-	row-gap: 30px;
+	display : grid;
+	grid-template-columns : repeat(3,minmax(280px,280px));
+	justify-content : space-between;
+	row-gap : 30px;
 }
 
 .movie-card {
-	background: #fff;
-	border-radius: 5px;
-	overflow: hidden;
-	align-content: center;
-	transition: transform 0.3s ease;
-	filter: brightness(0.9) contrast(0.9);
-	width: 280px;
-	height: 300px;
+	background : #fff;
+	border-radius : 5px;
+	overflow : hidden;
+	align-content : center;
+	transition : transform 0.3s ease;
+	filter : brightness(0.9) contrast(0.9);
+	width : 280px;
+	height : 300px;
 }
 
 .movie-card-content {
-	opacity: 0.8;
-	position: absolute;
-	width: 100%;
-	height: 30%;
-	top: 120px;
-	background: #333;
-	text-align: center;
-	align-content: center;
+	opacity : 0.8;
+	position : absolute;
+	width : 100%;
+	min-height : 30%;
+	max-height : 50%;
+	top : 120px;
+	background : #333;
+	text-align : center;
+	align-content : center;
 }
 
 .movie-card-content > h3 {
-	margin-left: 40px;
-	width: 200px;
-	color: #fff;
+	margin-left : 40px;
+	width : 200px;
+	color : #fff;
 }
 
 .movie-card:hover {
-	.movie-card-content {
-		opacity: 1;
-	}
-	transform: scale(1.2);
-	cursor: pointer;
-	filter: drop-shadow(0 0 3px rgba(0,0,0,0.3)) brightness(1) contrast(1);
+	cursor : pointer;
+	filter : drop-shadow(0 0 3px rgb(0, 0, 0, 0.3)) brightness(1) contrast(1);
 }
 
 .movie-card img {
-	position: absolute;
-	bottom: -60px;
-	width: 280px;
-	height: 400px;
-	object-fit: fill;
+	position : absolute;
+	bottom : -60px;
+	width : 280px;
+	height : 400px;
+	object-fit : fill;
 }
 
 .movie-card-rating {
-	text-align: center;
+	text-align : center;
 }
 
 .movie-info {
-	padding: 10px;
+	padding : 10px;
 }
 
 .modal {
-	display: none;
-	position: fixed;
-	z-index: 1;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	overflow: auto;
-	background-color: rgba(0,0,0,0.5);
+	display : none;
+	position : fixed;
+	z-index : 1;
+	left : 0;
+	top : 0;
+	width : 100%;
+	height : 100%;
+	overflow : auto;
+	background-color : rgb(0, 0, 0, 0.5);
 }
 
 .modal-content {
-	background-color: #fefefe;
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
-	padding-left: 20px;
-	padding-right: 20px;
-	padding-bottom: 20px;
-	border: 1px solid #888;
-	width: 80%;
-	max-width: 1160px;
-	overflow: hidden;
+	background-color : #fefefe;
+	position : absolute;
+	left : 50%;
+	top : 50%;
+	transform : translate(-50%,-50%);
+	padding-left : 20px;
+	padding-right : 20px;
+	padding-bottom : 20px;
+	border : #888 solid 1px;
+	width : 80%;
+	max-width : 960px;
+	overflow : hidden;
 }
 
 .modal-header {
-	display: block;
-	margin-top: 10px;
+	display : block;
+	margin-top : 10px;
 }
 
 .modal-header h2 {
-	line-height: 1em;
-	white-space: nowrap;
-	margin-top: 5px;
-	width: 96%;
-	height: 30px;
-	overflow: hidden;
+	line-height : 1em;
+	white-space : nowrap;
+	margin-top : 5px;
+	width : 96%;
+	height : 30px;
+	overflow : hidden;
 }
 
 .info-container {
-	display: flex;
-	width: 100%;
-	justify-content: space-between;
-	margin-bottom: 10px;
-	font-weight: bold;
+	display : flex;
+	width : 100%;
+	justify-content : space-between;
+	margin-bottom : 10px;
+	font-weight : bold;
 }
 
 .details {
-	margin-right: 20px;
+	margin-right : 20px;
 }
 
 .info-container img {
-	height: 400px;
-	width: 300px;
-	filter: drop-shadow(0 0 3px rgba(0,0,0,0.3))
+	height : 400px;
+	width : 300px;
+	filter : drop-shadow(0 0 3px rgb(0, 0, 0, 0.3));
 }
 
 .synopsis-label, .actors-label, .directors-label {
-	margin-top: 20px;
+	margin-top : 20px;
 }
 
 .synopsis, .actors, .directors {
-	font-weight: normal;
-	text-align: justify;
+	font-weight : normal;
+	text-align : justify;
 }
 
 .synopsis {
-	max-height: 300px;
-	overflow: auto;
+	max-height : 300px;
+	overflow : auto;
 }
 
 .close {
-	color: #aaa;
-	float: right;
-	position: relative;
-	top: -18px;
-	right: -12px;
-	height: 20px;
-	font-size: 28px;
-	font-weight: bold;
+	color : #aaa;
+	float : right;
+	position : relative;
+	top : -18px;
+	right : -12px;
+	height : 20px;
+	font-size : 28px;
+	font-weight : bold;
 }
 
 .close:hover, .close:focus {
-	color: black;
-	text-decoration: none;
-	cursor: pointer;
+	color : black;
+	text-decoration : none;
+	cursor : pointer;
 }
 
 .hidden {
-    display: none;
+	display : none;
 }
 
-@media (max-width: 1679px) {
+
+@media (max-width: 1199px) {
+	.container {
+		max-width : 720px;
+	}
+	.header-container {
+		max-width : 720px;
+	}
 	.movie-grid {
 		grid-template-columns: repeat(2, minmax(280px, 280px));
 	}
@@ -311,15 +320,9 @@ select {
 		max-height: 100%;
 		overflow: auto;
 	}
-	header h1 {
-		margin-top: 24px;
-	}
-	h1 {
-		font-size: 1.5em;
-	}
 }
 
-@media (max-width: 720px) {
+@media (max-width: 719px){
 	.movie-grid {
 		grid-template-columns: repeat(1, minmax(280px, 280px));
 		justify-content: center;
@@ -356,3 +359,4 @@ select {
 	.container {
 		text-align: center;
 	}
+}
