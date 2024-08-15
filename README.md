@@ -1,7 +1,7 @@
 # OC_06_JustStreamIt  :movie_camera:  
   
 # ● Description du projet  
-Site web JustStreamIt affichant les meilleurs films d'une bdd en passant par une api. Il permet de générer un affichage clair et intuitif des films les mieux notés. En plus d'une premiere grille des meilleurs films, le site propose deux autres grilles de rangement par genre et une quatrieme grille à choix libre. Le site interroge une API qui va chercher dans une base de données de films les éléments requis pour la construction et l'affichage de la page web. La page générée est responsive mobile + tablette + desktop et utilise vanilla css + vanilla javascript. Html + Css sont validés conformes aux normes W3C.
+Site web JustStreamIt affichant les meilleurs films d'une bdd en passant par une api. Il permet de générer un affichage clair et intuitif des films les mieux notés. En plus d'une premiere grille des meilleurs films, le site propose deux autres grilles de rangement par genre et une quatrieme grille à choix libre. Le site interroge une API qui va chercher dans une base de données de films les éléments requis pour la construction et l'affichage de la page web. La page générée est responsive mobile + tablette + desktop et utilise vanilla css + vanilla javascript. Html + Css sont validés conformes aux normes W3C.  
   
 Le projet répond à ce cahier des charges :  
 https://s3.eu-west-1.amazonaws.com/course.oc-static.com/projects/Python+FR/P6+-+D%C3%A9velopper+une+interface+utilisateur+pour+une+application+web+Python/Cahier+des+charges+%E2%80%93+JustStreamIt.pdf  
