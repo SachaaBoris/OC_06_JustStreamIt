@@ -573,6 +573,8 @@ async function pageInit() {
   const selectedMovie = topMovies[Math.floor(Math.random() * topMovies.length)];
   const featuredMovie = await fetchMovie(selectedMovie.id);
   displayFeaturedMovie(featuredMovie);
+  const loading = document.getElementById("loading");
+  loading.style.display = "none";
   await initializeGrid(grid2);
   await initializeGrid(grid3);
   await initializeGrid(grid4);
