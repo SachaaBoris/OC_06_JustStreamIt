@@ -1,5 +1,6 @@
 *.au3
 *.bat
+*.lnk
 _WorkDir/*
 .idea/*
 venv/*

@@ -34,12 +34,16 @@ let debounceTimeout;
 let handleLoadMoreClick;
 let handleResetClick;
 
-// Appeller les fonctions principales
-createSections();
-createDivHeaders();
-calculateMoviesShown();
-initializeFilter();
-pageInit();
+// fonctions principales
+function main() {
+	createSections();
+	createDivHeaders();
+	calculateMoviesShown();
+	initializeFilter();
+	pageInit();
+}
+
+main()
 
 // Debounce
 function debounce(func, delay) {
@@ -489,17 +493,16 @@ async function openModal(id) {
     actors,
     image_url,
   } = movie;
-
   const sanitizedRating = [
     "Not rated or unkown rating",
     "Not rated or unknown rating",
   ].includes(rated)
     ? "Not rated"
     : rated;
-  const boxOffice =
-    worldwide_gross_income === "Unknown worldwide_gross_income."
-      ? "Unknown"
-      : `${worldwide_gross_income} $`;
+  const boxOffice = 
+    typeof worldwide_gross_income === 'number'
+      ? `${worldwide_gross_income} $`
+      : "Unknown";
 
   modalContent.innerHTML = `
     <div class="modal-header">
@@ -514,9 +517,9 @@ async function openModal(id) {
             "year"
           )} - ${fillWithData(genres.join(", "), "genres")}</div>
           <div>${sanitizedRating} - ${fillWithData(
-    duration,
-    "duration"
-  )}mn (${fillWithData(countries.join(" / "), "country")})</div>
+               duration,
+              "duration"
+              )}mn (${fillWithData(countries.join(" / "), "country")})</div>
           <div>Box Office: ${boxOffice}</div>
           <div>IMDb Score: ${fillWithData(imdb_score, "score")}/10</div>
           <div class="directors-label">Director:</div>
