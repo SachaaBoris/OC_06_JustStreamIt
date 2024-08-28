@@ -234,30 +234,48 @@ function initializeFilter() {
     const titleGrid4 = document.getElementById("gridHeader4");
     titleGrid4.textContent = `${filter.value}` + " Movies";
     grid4.genre = `${filter.value}`;
-    grid4.fetchUrl = `http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&page_size=12&genre_contains=${encodeURIComponent(
+    grid4.fetchUrl = `http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&page_size=6&genre_contains=${encodeURIComponent(
       filter.value
     )}`;
     initializeGrid(grid4);
   });
 }
 
-// Rapporter de multiples films
-async function fetchMovies(genre, nextUrl) {
-  const url = nextUrl;
-  const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error("Network response was not ok");
+// Fetch url
+async function fetching(url) {
+  try {
+	const response = await fetch(url);
+	if (!response.ok) {
+      throw new Error(`Network response was not ok: ${response.status}`);
+    }
+	const data = await response.json();
+    return data;
+  } catch (error) {
+    apiError(error)
+	return null;
   }
-  const moviesData = await response.json();
+}
+
+// Rapporter une liste de films
+async function fetchMovies(url) {
+  moviesData = await fetching(url)
   return moviesData.results;
 }
 
 // Rapporter les détails d'un film
 async function fetchMovie(id) {
   const url = "http://localhost:8000/api/v1/titles/" + id;
-  const response = await fetch(url);
-  const movieData = await response.json();
+  movieData = await fetching(url)
   return movieData;
+}
+
+// Affichage d'erreur d'API
+function apiError(error) {
+  console.error("Fetch error: ", error);
+  const loading = document.getElementById("loading");
+  loading.innerHTML = `<img src="loading.gif" alt="Just Stream It"/>
+    <p>API is not currently responding, please try again later.</p>`;
+  loading.style.display = "block";
 }
 
 // Filtrer et formatter les données d'un film
@@ -387,7 +405,7 @@ function loadMoreMovies(grid) {
 // Initialiser la grille
 async function initializeGrid(grid) {
   if (grid.movies.length === 0) {
-    grid.movies = await fetchMovies(grid.genre, grid.fetchUrl);
+    grid.movies = await fetchMovies(grid.fetchUrl);
   }
   displayMovies(grid);
 }
@@ -498,7 +516,7 @@ async function openModal(id) {
     "Not rated or unknown rating",
   ].includes(rated)
     ? "Not rated"
-    : rated;
+    : `Rated ${rated}`;
   const boxOffice = 
     typeof worldwide_gross_income === 'number'
       ? `${worldwide_gross_income} $`
