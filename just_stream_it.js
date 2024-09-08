@@ -189,16 +189,6 @@ function clearMovieGrids() {
   });
 }
 
-// Reset une grille
-function resetGrid(grid) {
-  const movieGrid = document.getElementById(`${grid.elementId}`);
-  const movieCards = movieGrid.getElementsByClassName("movie-card");
-  const movieCardsArray = Array.from(movieCards);
-  movieCardsArray.forEach((card) => movieGrid4.removeChild(card));
-  grid.currentPage = 0;
-  initializeGrid(grid);
-}
-
 // Reset la grille 4
 function clearMovieGrid4() {
   const movieGrid4 = document.getElementById("movieGrid4");
